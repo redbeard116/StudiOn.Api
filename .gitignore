@@ -1,0 +1,7 @@
+/.vs/*
+/ApiGateway/bin/*
+/ApiGateway/obj/*
+/IdentityServer/bin/*
+/IdentityServer/obj/*
+/Producst.Api/bin/*
+/Producst.Api/obj/*
