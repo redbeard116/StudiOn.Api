@@ -1,4 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using IdentityService.Extensions;
 
 namespace Products.Api.Extensions
 {
@@ -10,16 +10,7 @@ namespace Products.Api.Extensions
 
             services.AddControllers();
 
-            services.AddAuthentication("Bearer")
-                    .AddJwtBearer("Bearer", options =>
-                    {
-                        options.Authority = "https://localhost:5005";
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateAudience = false,
-                            ValidateLifetime = true
-                        };
-                    });
+            services.AddCustomJwtAuth();
 
             services.AddAuthorization(options =>
             {

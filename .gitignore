@@ -5,3 +5,9 @@
 /IdentityServer/obj/*
 /Producst.Api/bin/*
 /Producst.Api/obj/*
+/Authentication.Api/bin/*
+/Authentication.Api/obj/*
+/IdentityService/bin/*
+/IdentityService/obj/*
+/ResponceModel/bin/*
+/ResponceModel/obj/*
