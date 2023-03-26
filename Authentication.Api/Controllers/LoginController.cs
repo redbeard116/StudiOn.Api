@@ -1,4 +1,6 @@
-﻿using IdentityService;
+﻿using Authentication.Api.Extensions;
+using Authentication.Api.Services;
+using IdentityService;
 using IdentityService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +12,13 @@ namespace Authentication.Api.Controllers
     public class LoginController : ControllerBase
     {
         #region Fields
-        private readonly JwtTokenHandler _loginService;
+        private readonly IAuthService _authService;
         #endregion
 
         #region Constructor
-        public LoginController()
+        public LoginController(IAuthService authService)
         {
-            _loginService = new JwtTokenHandler();
+            _authService = authService;
         }
         #endregion
 
@@ -26,14 +28,11 @@ namespace Authentication.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Login([FromBody] AuthRequest userLogin)
+        public async Task<IActionResult> Login([FromBody] AuthRequest userLogin)
         {
-            var result = _loginService.GenerateJwtToken(userLogin);
+            var result = await _authService.AuthUser(userLogin);
 
-            if (result == null)
-                return Unauthorized();
-
-            return Ok(result);
+            return this.Result(result);
         }
 
         /// <summary>

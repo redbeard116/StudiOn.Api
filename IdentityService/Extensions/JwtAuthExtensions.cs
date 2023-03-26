@@ -9,6 +9,7 @@ namespace IdentityService.Extensions
     {
         public static void AddCustomJwtAuth(this IServiceCollection services)
         {
+            services.AddSingleton<IJwtTokenHandler, JwtTokenHandler>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -17,7 +18,7 @@ namespace IdentityService.Extensions
             {
                 options.RequireHttpsMetadata = false;
                 options.SaveToken = true;
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = false,
                     ValidateIssuerSigningKey = true,

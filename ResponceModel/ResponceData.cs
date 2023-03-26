@@ -9,12 +9,18 @@ namespace ResponceModel
     /// <typeparam name="T"></typeparam>
     public class ResponseData<T> : ResponseBase
     {
+
         public ResponseData(HttpStatusCode httpStatusCode, string errorMessage = null) : base(httpStatusCode, errorMessage)
         {
 
         }
 
-        public T Data { get; set; }
+        public ResponseData(T data,HttpStatusCode httpStatusCode = HttpStatusCode.OK, string errorMessage = null) : base(httpStatusCode, errorMessage)
+        {
+            Data = data;
+        }
+
+        public T Data { get;  init; }
     }
 
     public class VoidResponse : ResponseBase
