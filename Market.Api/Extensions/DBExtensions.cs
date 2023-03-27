@@ -1,7 +1,7 @@
-﻿using Authentication.Api.Data;
+﻿using Market.Api.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Authentication.Api.Extensions
+namespace Market.Api.Extensions
 {
     internal static class DBExtensions
     {

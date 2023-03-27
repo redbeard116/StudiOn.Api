@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Authentication.Api.Data.Models
+namespace DatabaseModelsBase
 {
-    internal class BaseDbM
+    public class BaseDbM
     {
+
         [Key, Column("id")]
         public int Id { get; set; }
     }

@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Authentication.Api.Data
+namespace Market.Api.Data
 {
     internal interface IDbRepositoryContextFactory
     {
         DBService CreateDbContext();
     }
 
-    internal class DbRepositoryContextFactory: IDbRepositoryContextFactory
+    internal class DbRepositoryContextFactory : IDbRepositoryContextFactory
     {
         #region Fields
         private readonly string _connectionString;
@@ -17,7 +17,7 @@ namespace Authentication.Api.Data
         public DbRepositoryContextFactory(string connectionString)
         {
             _connectionString = connectionString;
-        } 
+        }
         #endregion
 
         public DBService CreateDbContext()

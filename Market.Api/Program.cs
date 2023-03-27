@@ -1,5 +1,5 @@
+using Market.Api.Extensions;
 using NLog.Web;
-using Products.Api.Extensions;
 
 var logFactory = NLogBuilder.ConfigureNLog(GetNlogConfig());
 var logger = logFactory.GetCurrentClassLogger();
@@ -16,9 +16,9 @@ builder.Services.AddServices(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+app.SetDatabaseMigrations();
 
-app.UseAuthentication();
+app.UseAuthorization();
 app.UseAuthorization();
 
 app.MapControllers();

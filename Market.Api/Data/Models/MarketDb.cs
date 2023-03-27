@@ -2,15 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Authentication.Api.Data.Models
+namespace Market.Api.Data.Models
 {
-    [Table("user_types", Schema = "user")]
-    internal class UserType : BaseDbM
+    [Table("markets", Schema = "market")]
+    internal class MarketDb: BaseDbM
     {
-        public UserType()
-        {
-            Users = new List<UserDb>();
-        }
+        [Column("user_id"), Required]
+        public int UserId { get; set; }
 
         [Column("name"), Required]
         public string Name { get; set; }
@@ -18,6 +16,7 @@ namespace Authentication.Api.Data.Models
         [Column("is_deleted"), Required]
         public bool IsDeleted { get; set; } = false;
 
-        public ICollection<UserDb> Users { get; set; }
+        [Column("created_date"), Required]
+        public DateTime CreatedDate { get; set; }
     }
 }

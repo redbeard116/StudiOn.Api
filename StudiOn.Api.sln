@@ -18,6 +18,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.Api", "Authe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService", "IdentityService\IdentityService.csproj", "{5265A104-35DF-4961-94D7-ADBC13D57C1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.Api", "Market.Api\Market.Api.csproj", "{A1228FF3-109C-4CAD-94A5-1FBE21C64481}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseModelsBase", "DatabaseModelsBase\DatabaseModelsBase.csproj", "{2A2471B1-19CD-402C-9AA5-EB57C9800A07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,14 @@ Global
 		{5265A104-35DF-4961-94D7-ADBC13D57C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5265A104-35DF-4961-94D7-ADBC13D57C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5265A104-35DF-4961-94D7-ADBC13D57C1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1228FF3-109C-4CAD-94A5-1FBE21C64481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1228FF3-109C-4CAD-94A5-1FBE21C64481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1228FF3-109C-4CAD-94A5-1FBE21C64481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1228FF3-109C-4CAD-94A5-1FBE21C64481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A2471B1-19CD-402C-9AA5-EB57C9800A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A2471B1-19CD-402C-9AA5-EB57C9800A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A2471B1-19CD-402C-9AA5-EB57C9800A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A2471B1-19CD-402C-9AA5-EB57C9800A07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

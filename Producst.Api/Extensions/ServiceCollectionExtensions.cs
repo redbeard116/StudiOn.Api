@@ -4,21 +4,14 @@ namespace Products.Api.Extensions
 {
     internal static class ServiceCollectionExtensions
     {
-        public static void AddServices(this IServiceCollection services)
+        public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
-
-            services.AddControllers();
-
             services.AddCustomJwtAuth();
 
-            services.AddAuthorization(options =>
+            services.AddControllers().AddNewtonsoftJson(action =>
             {
-                options.AddPolicy("ClientIdPolicy", policy => policy.RequireClaim("productClient", "ProductsAPI"));
+                action.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
-
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
         }
     }
 }
