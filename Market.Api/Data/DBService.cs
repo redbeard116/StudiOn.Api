@@ -1,9 +1,10 @@
-﻿using Market.Api.Data.Models;
+﻿using DatabaseModelsBase;
+using Market.Api.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Market.Api.Data
 {
-    internal class DBService : DbContext
+    internal class DBService : BaseDataBaseContext
     {
         public DBService(DbContextOptions<DBService> options) : base(options)
         {
@@ -18,6 +19,8 @@ namespace Market.Api.Data
 
             modelBuilder.Entity<MarketDb>().HasIndex(w => w.Id).IsUnique();
             modelBuilder.Entity<MarketDb>().HasIndex(w => w.Name);
+
+            modelBuilder.Entity<MarketDb>().HasQueryFilter(w => !w.IsDeleted);
         }
     }
 }

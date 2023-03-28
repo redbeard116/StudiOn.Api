@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DatabaseModelsBase;
+using Microsoft.EntityFrameworkCore;
 using Producst.Api.Data.Models;
 
 namespace Producst.Api.Data
 {
-    internal class DBService : DbContext
+    internal class DBService : BaseDataBaseContext
     {
         public DBService(DbContextOptions<DBService> options) : base(options)
         {
@@ -21,6 +22,8 @@ namespace Producst.Api.Data
             modelBuilder.Entity<ProductDb>().HasIndex(w => w.CategoryId);
             modelBuilder.Entity<ProductDb>().HasIndex(w => w.Price);
             modelBuilder.Entity<ProductDb>().HasIndex(w => w.Name);
+
+            modelBuilder.Entity<ProductDb>().HasQueryFilter(w => !w.IsDeleted);
         }
 
         public DbSet<ProductDb> Products { get; set; }

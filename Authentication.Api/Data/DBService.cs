@@ -1,9 +1,10 @@
 ﻿using Authentication.Api.Data.Models;
+using DatabaseModelsBase;
 using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.Api.Data
 {
-    internal class DBService : DbContext
+    internal class DBService : BaseDataBaseContext
     {
         public DBService(DbContextOptions<DBService> options) : base(options)
         {
@@ -24,6 +25,9 @@ namespace Authentication.Api.Data
 
             modelBuilder.Entity<UserDb>().HasIndex(w => w.Login).IsUnique();
             modelBuilder.Entity<UserDb>().HasIndex(w => w.Password);
+
+            modelBuilder.Entity<UserDb>().HasQueryFilter(w => !w.IsDeleted);
+            modelBuilder.Entity<UserType>().HasQueryFilter(w => !w.IsDeleted);
 
             var guid = Guid.NewGuid();
             modelBuilder.Entity<UserType>().HasData(new UserType { Id = guid, Name = "Admin" });
