@@ -14,16 +14,12 @@ namespace Market.Api.Migrations
             migrationBuilder.EnsureSchema(
                 name: "market");
 
-            migrationBuilder.CreateSequence(
-                name: "markets_id_seq",
-                schema: "market");
-
             migrationBuilder.CreateTable(
                 name: "markets",
                 schema: "market",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('market.markets_id_seq'::regclass)"),
+                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "public.uuid_generate_v4()"),
                     user_id = table.Column<int>(type: "integer", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     is_deleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -54,10 +50,6 @@ namespace Market.Api.Migrations
         {
             migrationBuilder.DropTable(
                 name: "markets",
-                schema: "market");
-
-            migrationBuilder.DropSequence(
-                name: "markets_id_seq",
                 schema: "market");
         }
     }

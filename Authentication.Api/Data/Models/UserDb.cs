@@ -17,7 +17,7 @@ namespace Authentication.Api.Data.Models
         public string Password { get; set; }
 
         [Column("user_type_id"), Required]
-        public int UserTypeId { get; set; }
+        public Guid UserTypeId { get; set; }
         public virtual UserType UserType { get; set; }
 
         [Column("create_date"), Required]

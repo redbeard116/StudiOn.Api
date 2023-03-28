@@ -22,20 +22,16 @@ namespace Authentication.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.HasSequence("user_types_id_seq", "user");
-
-            modelBuilder.HasSequence("users_id_seq", "user");
-
             modelBuilder.Entity("Authentication.Api.Data.Models.UserDb", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('user.users_id_seq'::regclass)");
+                        .HasDefaultValueSql("public.uuid_generate_v4()");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("create_date");
 
                     b.Property<bool>("IsBlocked")
@@ -61,8 +57,8 @@ namespace Authentication.Api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("user_name");
 
-                    b.Property<int>("UserTypeId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("UserTypeId")
+                        .HasColumnType("uuid")
                         .HasColumnName("user_type_id");
 
                     b.HasKey("Id");
@@ -80,24 +76,24 @@ namespace Authentication.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CreateDate = new DateTime(2023, 3, 25, 19, 23, 22, 497, DateTimeKind.Local).AddTicks(8879),
+                            Id = new Guid("6ace91a3-90d7-4b94-af67-f5e3f23f1eb6"),
+                            CreateDate = new DateTime(2023, 3, 28, 19, 44, 53, 454, DateTimeKind.Local).AddTicks(4135),
                             IsBlocked = false,
                             IsDeleted = false,
                             Login = "stud_admin",
-                            Password = "$2a$11$HI/5apZk.FRXhkRZiP54xer1li/vbX.GANXjCUqyG0OiD/vRcAa/O",
+                            Password = "$2a$11$1BNtntCoqAo1XeVpkxfBXObljF5dbCEJADSRW095XMLNMjiaPlha6",
                             UserName = "StudiOn Admin",
-                            UserTypeId = 1
+                            UserTypeId = new Guid("2d000882-3a29-4f84-94ec-1d98d0c2cfa4")
                         });
                 });
 
             modelBuilder.Entity("Authentication.Api.Data.Models.UserType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('user_types_id_seq.users_id_seq'::regclass)");
+                        .HasDefaultValueSql("public.uuid_generate_v4()");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean")
@@ -115,7 +111,7 @@ namespace Authentication.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("2d000882-3a29-4f84-94ec-1d98d0c2cfa4"),
                             IsDeleted = false,
                             Name = "Admin"
                         });

@@ -12,11 +12,9 @@ namespace Market.Api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasSequence("markets_id_seq", "market");
-
             modelBuilder.Entity<MarketDb>()
               .Property(b => b.Id)
-              .HasDefaultValueSql("nextval('market.markets_id_seq'::regclass)");
+              .HasDefaultValueSql("public.uuid_generate_v4()");
 
             modelBuilder.Entity<MarketDb>().HasIndex(w => w.Id).IsUnique();
             modelBuilder.Entity<MarketDb>().HasIndex(w => w.Name).IsUnique();

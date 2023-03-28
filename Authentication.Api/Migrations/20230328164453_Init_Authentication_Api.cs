@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Authentication.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Init_AuthenticationApi : Migration
+    public partial class Init_Authentication_Api : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,20 +14,12 @@ namespace Authentication.Api.Migrations
             migrationBuilder.EnsureSchema(
                 name: "user");
 
-            migrationBuilder.CreateSequence(
-                name: "user_types_id_seq",
-                schema: "user");
-
-            migrationBuilder.CreateSequence(
-                name: "users_id_seq",
-                schema: "user");
-
             migrationBuilder.CreateTable(
                 name: "user_types",
                 schema: "user",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('user.user_types_id_seq'::regclass)"),
+                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "public.uuid_generate_v4()"),
                     name = table.Column<string>(type: "text", nullable: false),
                     is_deleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -41,12 +33,12 @@ namespace Authentication.Api.Migrations
                 schema: "user",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('user.users_id_seq'::regclass)"),
+                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "public.uuid_generate_v4()"),
                     user_name = table.Column<string>(type: "text", nullable: false),
                     login = table.Column<string>(type: "text", nullable: false),
                     password = table.Column<string>(type: "text", nullable: false),
-                    user_type_id = table.Column<int>(type: "integer", nullable: false),
-                    create_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    user_type_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    create_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     is_blocked = table.Column<bool>(type: "boolean", nullable: false),
                     is_deleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -66,13 +58,13 @@ namespace Authentication.Api.Migrations
                 schema: "user",
                 table: "user_types",
                 columns: new[] { "id", "is_deleted", "name" },
-                values: new object[] { 1, false, "Admin" });
+                values: new object[] { new Guid("2d000882-3a29-4f84-94ec-1d98d0c2cfa4"), false, "Admin" });
 
             migrationBuilder.InsertData(
                 schema: "user",
                 table: "users",
                 columns: new[] { "id", "create_date", "is_blocked", "is_deleted", "login", "password", "user_name", "user_type_id" },
-                values: new object[] { 1, new DateTime(2023, 3, 25, 19, 23, 22, 497, DateTimeKind.Local).AddTicks(8879), false, false, "stud_admin", "$2a$11$HI/5apZk.FRXhkRZiP54xer1li/vbX.GANXjCUqyG0OiD/vRcAa/O", "StudiOn Admin", 1 });
+                values: new object[] { new Guid("6ace91a3-90d7-4b94-af67-f5e3f23f1eb6"), new DateTime(2023, 3, 28, 19, 44, 53, 454, DateTimeKind.Local).AddTicks(4135), false, false, "stud_admin", "$2a$11$1BNtntCoqAo1XeVpkxfBXObljF5dbCEJADSRW095XMLNMjiaPlha6", "StudiOn Admin", new Guid("2d000882-3a29-4f84-94ec-1d98d0c2cfa4") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_users_login",
@@ -104,14 +96,6 @@ namespace Authentication.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "user_types",
-                schema: "user");
-
-            migrationBuilder.DropSequence(
-                name: "user_types_id_seq",
-                schema: "user");
-
-            migrationBuilder.DropSequence(
-                name: "users_id_seq",
                 schema: "user");
         }
     }

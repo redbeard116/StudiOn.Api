@@ -22,15 +22,13 @@ namespace Market.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.HasSequence("markets_id_seq", "market");
-
             modelBuilder.Entity("Market.Api.Data.Models.MarketDb", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('market.markets_id_seq'::regclass)");
+                        .HasDefaultValueSql("public.uuid_generate_v4()");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone")

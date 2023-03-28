@@ -10,7 +10,7 @@ namespace IdentityService
 {
     public interface IJwtTokenHandler
     {
-        AuthResponce GenerateJwtToken(string name, string role, int id);
+        AuthResponce GenerateJwtToken(string name, string role, Guid id);
         bool VerifyPassword(string password, string hash, byte[] salt);
     }
 
@@ -22,7 +22,7 @@ namespace IdentityService
         private const int iterations = 350000;
 
         #region IJwtTokenHandler
-        public AuthResponce GenerateJwtToken(string name, string role, int id)
+        public AuthResponce GenerateJwtToken(string name, string role, Guid id)
         {
             var tokenExpityTime = DateTime.Now.AddMinutes(JWT_TOKEN_VALIDITY_MINS);
             var tokenKey = Encoding.ASCII.GetBytes(JWT_SECURITY_KEY);
