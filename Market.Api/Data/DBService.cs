@@ -17,7 +17,7 @@ namespace Market.Api.Data
               .HasDefaultValueSql("public.uuid_generate_v4()");
 
             modelBuilder.Entity<MarketDb>().HasIndex(w => w.Id).IsUnique();
-            modelBuilder.Entity<MarketDb>().HasIndex(w => w.Name).IsUnique();
+            modelBuilder.Entity<MarketDb>().HasIndex(w => w.Name);
         }
     }
 }

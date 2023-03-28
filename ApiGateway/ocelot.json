@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5002
+          "Port": 5003
         }
       ],
       "UpstreamPathTemplate": "/api/products",
@@ -14,7 +14,8 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
-      }
+      },
+      "SwaggerKey": "product"
     },
     {
       "DownstreamPathTemplate": "/api/login",
@@ -22,11 +23,25 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5288
+          "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/api/login",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "authentication"
+    },
+    {
+      "DownstreamPathTemplate": "/api/login/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/login/{everything}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "authentication"
     },
     {
       "DownstreamPathTemplate": "/api/markets",
@@ -34,7 +49,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5050
+          "Port": 5002
         }
       ],
       "UpstreamPathTemplate": "/api/markets",
@@ -42,7 +57,40 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
-      }
+      },
+      "SwaggerKey": "market"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "authentication",
+      "Config": [
+        {
+          "Name": "Authentication API",
+          "Version": "v1",
+          "Url": "http://localhost:5001/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "market",
+      "Config": [
+        {
+          "Name": "Market API",
+          "Version": "v1",
+          "Url": "http://localhost:5002/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "product",
+      "Config": [
+        {
+          "Name": "Producst API",
+          "Version": "v1",
+          "Url": "http://localhost:5003/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }

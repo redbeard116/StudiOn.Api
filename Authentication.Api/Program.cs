@@ -18,6 +18,17 @@ var app = builder.Build();
 
 app.SetDatabaseMigrations();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty;
+    });
+}
+
 app.UseAuthorization();
 app.UseAuthorization();
 

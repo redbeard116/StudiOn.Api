@@ -23,7 +23,7 @@ namespace Authentication.Api.Data
             modelBuilder.Entity<UserDb>().HasOne(w => w.UserType).WithMany(w => w.Users);
 
             modelBuilder.Entity<UserDb>().HasIndex(w => w.Login).IsUnique();
-            modelBuilder.Entity<UserDb>().HasIndex(w => w.Password).IsUnique();
+            modelBuilder.Entity<UserDb>().HasIndex(w => w.Password);
 
             var guid = Guid.NewGuid();
             modelBuilder.Entity<UserType>().HasData(new UserType { Id = guid, Name = "Admin" });

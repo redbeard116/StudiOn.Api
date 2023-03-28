@@ -13,9 +13,6 @@ namespace Market.Api.Data.Models
         [Column("name"), Required]
         public string Name { get; set; }
 
-        [Column("is_deleted"), Required]
-        public bool IsDeleted { get; set; } = false;
-
         [Column("created_date"), Required]
         public DateTime CreatedDate { get; set; }
     }

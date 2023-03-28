@@ -2,6 +2,7 @@
 using Authentication.Api.Services;
 using IdentityService.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace Authentication.Api.Extensions
 {
@@ -17,6 +18,12 @@ namespace Authentication.Api.Extensions
             services.AddCustomJwtAuth();
 
             services.AddScoped<IAuthService, AuthService>();
+
+            services.AddSwaggerGenNewtonsoftSupport();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Authentication API", Version = "v1" });
+            });
 
             services.AddControllers().AddNewtonsoftJson(action =>
             {

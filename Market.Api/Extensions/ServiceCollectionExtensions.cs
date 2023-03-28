@@ -2,6 +2,7 @@
 using Market.Api.Data;
 using Market.Api.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace Market.Api.Extensions
 {
@@ -17,6 +18,12 @@ namespace Market.Api.Extensions
             services.AddCustomJwtAuth();
 
             services.AddScoped<IMarketServices, MarketServices>();
+
+            services.AddSwaggerGenNewtonsoftSupport();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Market API", Version = "v1" });
+            });
 
             services.AddControllers().AddNewtonsoftJson(action =>
             {

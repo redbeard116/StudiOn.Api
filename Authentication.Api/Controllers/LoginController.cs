@@ -43,7 +43,7 @@ namespace Authentication.Api.Controllers
         //[ProducesResponseType(200, Type = typeof(ResponseData<UserResponse>))]
         public async Task<IActionResult> UserRefreshToken()
         {
-            return Ok();
+            return Ok("It`s live");
         }
 
         /// <summary>

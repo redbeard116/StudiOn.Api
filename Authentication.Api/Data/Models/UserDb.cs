@@ -25,8 +25,5 @@ namespace Authentication.Api.Data.Models
 
         [Column("is_blocked"), Required]
         public bool IsBlocked { get; set; } = false;
-
-        [Column("is_deleted"), Required]
-        public bool IsDeleted { get; set; } = false;
     }
 }

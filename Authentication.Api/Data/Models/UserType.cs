@@ -15,9 +15,6 @@ namespace Authentication.Api.Data.Models
         [Column("name"), Required]
         public string Name { get; set; }
 
-        [Column("is_deleted"), Required]
-        public bool IsDeleted { get; set; } = false;
-
         public ICollection<UserDb> Users { get; set; }
     }
 }

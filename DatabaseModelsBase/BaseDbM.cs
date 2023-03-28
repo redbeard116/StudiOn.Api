@@ -8,5 +8,8 @@ namespace DatabaseModelsBase
 
         [Key, Column("id")]
         public Guid Id { get; set; }
+
+        [Column("is_deleted"), Required]
+        public bool IsDeleted { get; set; } = false;
     }
 }
