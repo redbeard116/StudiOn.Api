@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DatabaseModelsBase\DatabaseModelsBase.csproj" />
-    <ProjectReference Include="..\IdentityService\IdentityService.csproj" />
     <ProjectReference Include="..\ResponceModel\ResponceModel.csproj" />
   </ItemGroup>
 

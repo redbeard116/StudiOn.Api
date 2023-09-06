@@ -1,5 +1,4 @@
-﻿using IdentityService.Extensions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Producst.Api.Data;
@@ -15,8 +14,6 @@ namespace Products.Api.Extensions
                                     new DbRepositoryContextFactory(configuration.GetConnectionString("ProductConnection")));
 
             services.AddDbContext<DBService>(option => option.UseNpgsql(configuration.GetConnectionString("ProductConnection")));
-
-            services.AddCustomJwtAuth();
 
             services.AddScoped<IProductServices, ProductServices>();
 

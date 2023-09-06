@@ -31,7 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DatabaseModelsBase\DatabaseModelsBase.csproj" />
-    <ProjectReference Include="..\IdentityService\IdentityService.csproj" />
   </ItemGroup>
 
 </Project>

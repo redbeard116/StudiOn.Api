@@ -1,5 +1,4 @@
-﻿using IdentityService.Extensions;
-using Market.Api.Data;
+﻿using Market.Api.Data;
 using Market.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -14,8 +13,6 @@ namespace Market.Api.Extensions
                                    new DbRepositoryContextFactory(configuration.GetConnectionString("MarketConnection")));
 
             services.AddDbContext<DBService>(option => option.UseNpgsql(configuration.GetConnectionString("MarketConnection")));
-
-            services.AddCustomJwtAuth();
 
             services.AddScoped<IMarketServices, MarketServices>();
 
