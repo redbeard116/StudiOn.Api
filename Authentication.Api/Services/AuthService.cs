@@ -82,7 +82,7 @@ namespace Authentication.Api.Services
                 _logger.LogInformation($"Auth in server");
                 using (var db = _contextFactory.CreateDbContext())
                 {
-                    var auth = await db.Users.FirstOrDefaultAsync(w => w.Login == user.Login);
+                    var auth = await db.Users.AsNoTracking().FirstOrDefaultAsync(w => w.Login == user.Login);
 
                     if (auth != null)
                     {

@@ -2,9 +2,8 @@
 
 namespace Authentication.Api.Data
 {
-    internal interface IDbRepositoryContextFactory
+    internal interface IDbRepositoryContextFactory: IDbContextFactory<DBService>
     {
-        DBService CreateDbContext();
     }
 
     internal class DbRepositoryContextFactory: IDbRepositoryContextFactory

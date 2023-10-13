@@ -10,9 +10,10 @@ namespace Authentication.Api.Extensions
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var factory = serviceScope.ServiceProvider.GetRequiredService<IDbRepositoryContextFactory>();
-                var context = factory.CreateDbContext();
-
-                context.Database.Migrate();
+                using (var context = factory.CreateDbContext())
+                {
+                    context.Database.Migrate();
+                }
             }
         }
     }

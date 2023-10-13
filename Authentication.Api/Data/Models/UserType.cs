@@ -9,7 +9,7 @@ namespace Authentication.Api.Data.Models
     {
         public UserType()
         {
-            Users = new List<UserDb>();
+
         }
 
         [Column("name"), Required]
