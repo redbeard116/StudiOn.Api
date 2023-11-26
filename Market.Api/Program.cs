@@ -1,4 +1,5 @@
 using Market.Api.Extensions;
+using Market.Services.Extensions;
 using NLog.Web;
 
 var logFactory = NLogBuilder.ConfigureNLog(GetNlogConfig());

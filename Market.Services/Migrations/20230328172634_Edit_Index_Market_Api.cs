@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Market.Api.Migrations
+namespace Market.Services.Migrations
 {
     /// <inheritdoc />
     public partial class Edit_Index_Market_Api : Migration

@@ -1,5 +1,7 @@
-﻿using Market.Api.Services;
+﻿using Market.Services.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ResponceModel.Extensions;
 
 namespace Market.Api.Controllers
 {
@@ -9,24 +11,35 @@ namespace Market.Api.Controllers
     {
         #region Fields
         private readonly ILogger<MarketsController> _logger;
-        private readonly IMarketServices _marketServices;
+        private readonly IMediator _mediator;
         #endregion
 
         #region Constructor
         public MarketsController(ILogger<MarketsController> logger,
-                                 IMarketServices marketServices)
+                                 IMediator mediator)
         {
             _logger = logger;
-            _marketServices = marketServices;
-
+            _mediator = mediator;
         }
         #endregion
 
         #region Actions
-        [HttpGet]
-        public IActionResult Get()
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] MarketAdd marketAdd)
         {
-            return Ok("It`s live!");
+            _logger.LogInformation("POST api/market");
+            var result = await _mediator.Send(marketAdd);
+            return this.Result(result);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> Edit(Guid id, [FromBody] MarketEdit marketEdit)
+        {
+            _logger.LogInformation($"PATCH api/market/{id}");
+            MarketEditM marketEditM = (MarketEditM)marketEdit;
+            marketEditM.Id = id;
+            var result = await _mediator.Send(marketEdit);
+            return this.Result(result);
         }
         #endregion
     }

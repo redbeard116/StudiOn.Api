@@ -1,15 +1,14 @@
-﻿using Authentication.Services.Data;
+﻿using Market.Services.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using IdentityService.Extensions;
 using System.Reflection;
-using Microsoft.EntityFrameworkCore;
 
-namespace Authentication.Services.Extensions;
+namespace Market.Services.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddAuthServices(this IServiceCollection serviceCollection, IConfiguration configuration)
+    public static void AddMarketServices(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
         serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
@@ -18,6 +17,5 @@ public static class ServiceCollectionExtensions
 
         serviceCollection.AddDbContext<DBService>(option => option.UseNpgsql(configuration.GetConnectionString("DbConnection")));
 
-        serviceCollection.AddCustomJwtAuth();
     }
 }

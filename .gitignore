@@ -19,3 +19,5 @@
 /DatabaseModelsBase/obj/*
 /Authentication.Services/bin/*
 /Authentication.Services/obj/*
+/Market.Services/bin/*
+/Market.Services/obj/*

@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeServices", "TimeService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Services", "Authentication.Services\Authentication.Services.csproj", "{032C87DE-289B-41AE-B0C4-77BCD69F3440}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.Services", "Market.Services\Market.Services.csproj", "{66A28090-EC26-4E82-A85B-BC2F05DC0777}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{032C87DE-289B-41AE-B0C4-77BCD69F3440}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{032C87DE-289B-41AE-B0C4-77BCD69F3440}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{032C87DE-289B-41AE-B0C4-77BCD69F3440}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66A28090-EC26-4E82-A85B-BC2F05DC0777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66A28090-EC26-4E82-A85B-BC2F05DC0777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66A28090-EC26-4E82-A85B-BC2F05DC0777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66A28090-EC26-4E82-A85B-BC2F05DC0777}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{2A2471B1-19CD-402C-9AA5-EB57C9800A07} = {CAC4D8E5-BD6A-4ADD-85E7-A184512A449C}
 		{C655FD59-D5FF-4DF2-86DF-7114991F5A07} = {CAC4D8E5-BD6A-4ADD-85E7-A184512A449C}
 		{032C87DE-289B-41AE-B0C4-77BCD69F3440} = {A303935A-5E5C-447B-AD41-E0848D4475F6}
+		{66A28090-EC26-4E82-A85B-BC2F05DC0777} = {A303935A-5E5C-447B-AD41-E0848D4475F6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2311AE05-EBFD-4E30-A7BD-839D817F8D0A}

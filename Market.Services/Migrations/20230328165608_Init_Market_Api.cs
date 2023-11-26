@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Market.Api.Migrations
+namespace Market.Services.Migrations
 {
     /// <inheritdoc />
     public partial class Init_Market_Api : Migration

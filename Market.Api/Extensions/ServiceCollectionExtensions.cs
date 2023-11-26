@@ -1,6 +1,4 @@
-﻿using Market.Api.Data;
-using Market.Api.Services;
-using Microsoft.EntityFrameworkCore;
+﻿using Market.Services.Extensions;
 using Microsoft.OpenApi.Models;
 
 namespace Market.Api.Extensions
@@ -9,12 +7,7 @@ namespace Market.Api.Extensions
     {
         public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IDbRepositoryContextFactory>(provider =>
-                                   new DbRepositoryContextFactory(configuration.GetConnectionString("MarketConnection")));
-
-            services.AddDbContext<DBService>(option => option.UseNpgsql(configuration.GetConnectionString("MarketConnection")));
-
-            services.AddScoped<IMarketServices, MarketServices>();
+            services.AddMarketServices(configuration);
 
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddSwaggerGen(c =>
