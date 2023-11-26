@@ -1,84 +1,85 @@
 ﻿using IdentityService.Models;
+using IdentityService.Models.Settings;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
-using TimeExtensions;
 
 namespace IdentityService
 {
     public interface IJwtTokenHandler
     {
         AuthResponce GenerateJwtToken(string name, string role, Guid id);
-        bool VerifyPassword(string password, string hash, byte[] salt);
     }
 
     internal class JwtTokenHandler: IJwtTokenHandler
     {
-        public const string JWT_SECURITY_KEY = "fdkjaldkjfhlaksdfhlaksjfhpruhfmnxvmz";
-        private const int JWT_TOKEN_VALIDITY_MINS = 1440;
-        private const int keySize = 64;
-        private const int iterations = 350000;
+        #region Fields
+        private readonly AuthOptions _authOptions;
+        #endregion
+
+        #region Constructor
+        public JwtTokenHandler(AuthOptions authOptions)
+        {
+            _authOptions = authOptions;
+        }
+        #endregion
 
         #region IJwtTokenHandler
         public AuthResponce GenerateJwtToken(string name, string role, Guid id)
         {
-            var tokenExpityTime = DateTime.Now.AddMinutes(JWT_TOKEN_VALIDITY_MINS);
-            var tokenKey = Encoding.ASCII.GetBytes(JWT_SECURITY_KEY);
-            var claimsIdentity = new ClaimsIdentity(new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Name, name),
-                new Claim(ClaimTypes.Role, role),
-                new Claim(ClaimTypes.NameIdentifier, id.ToString())
-            });
-
-            var signingCreditials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature);
-
-            var securityTokenDescription = new SecurityTokenDescriptor
-            {
-                Subject = claimsIdentity,
-                Expires = tokenExpityTime,
-                SigningCredentials = signingCreditials
-            };
-
-            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            var securityToken = jwtSecurityTokenHandler.CreateToken(securityTokenDescription);
-            var token = jwtSecurityTokenHandler.WriteToken(securityToken);
+            var claimIdenity = GetClaimIdentity(id, name, role);
+            var accessToken = GetAccessToken(claimIdenity);
 
             return new AuthResponce
             {
                 Id = id,
                 UserName = name,
-                Token = token,
-                RefreshTokenExpiryTime = tokenExpityTime.GetUnixTime(),
-                RefreshToken = GetRefreshToken(token)
+                Token = accessToken,
+                RefreshTokenExpiryTime = DateTimeOffset.UtcNow.Add(TimeSpan.FromMinutes(_authOptions.Lifetime)).ToUnixTimeSeconds(),
+                RefreshToken = BCrypt.Net.BCrypt.HashPassword(GenerateRefreshToken())
             };
         }
-
-        public bool VerifyPassword(string password, string hash, byte[] salt)
-        {
-            var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password,
-                                                          salt,
-                                                          iterations,
-                                                          HashAlgorithmName.SHA512,
-                                                          keySize);
-
-            return hashToCompare.SequenceEqual(Convert.FromHexString(hash));
-        } 
         #endregion
 
         #region Private methods
-        private string GetRefreshToken(string token)
+        private ClaimsIdentity GetClaimIdentity(Guid userId, string fullName, string role)
         {
-            var salt = RandomNumberGenerator.GetBytes(keySize);
-            var hash = Rfc2898DeriveBytes.Pbkdf2(
-                Encoding.UTF8.GetBytes(token),
-                salt,
-                iterations,
-                HashAlgorithmName.SHA512,
-                keySize);
-            return Convert.ToHexString(hash);
+            var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, fullName),
+                    new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+                };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, role);
+
+            return claimsIdentity;
+        }
+
+        private string GetAccessToken(ClaimsIdentity claimsIdentity)
+        {
+            var date = DateTime.UtcNow;
+            var jwt = new JwtSecurityToken(
+                    issuer: _authOptions.Issuer,
+                    audience: _authOptions.Audience,
+                    notBefore: date,
+                    claims: claimsIdentity.Claims,
+                    expires: date.Add(TimeSpan.FromMinutes(_authOptions.Lifetime)),
+                    signingCredentials: new SigningCredentials(_authOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+
+            return new JwtSecurityTokenHandler().WriteToken(jwt);
+        }
+
+        private string GenerateRefreshToken()
+        {
+            var random = RandomNumberGenerator.Create();
+
+            var randomBytes = new byte[64];
+            random.GetBytes(randomBytes);
+
+            var bytes = Convert.ToBase64String(randomBytes);
+
+            return BCrypt.Net.BCrypt.HashPassword(bytes);
         }
         #endregion
     }

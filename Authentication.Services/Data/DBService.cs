@@ -1,8 +1,8 @@
-﻿using Authentication.Api.Data.Models;
+﻿using Authentication.Services.Data.Models;
 using DatabaseModelsBase;
 using Microsoft.EntityFrameworkCore;
 
-namespace Authentication.Api.Data
+namespace Authentication.Services.Data
 {
     internal class DBService : BaseDataBaseContext
     {

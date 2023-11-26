@@ -1,0 +1,12 @@
+{
+  "AuthOptions": {
+    "Issuer": "RedServant Inc",
+    "Audience": "RedServant clients",
+    "Key": "b89c9ad17a929e334088d2",
+    "Lifetime": 1440,
+    "ValidateIssuer": true,
+    "ValidateAudience": true,
+    "ValidateLifetime": true,
+    "ValidateIssuerSigningKey": true
+  }
+}

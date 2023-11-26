@@ -1,3 +1,4 @@
+using Authentication.Services.Extensions;
 using Authentication.Api.Extensions;
 using NLog.Web;
 

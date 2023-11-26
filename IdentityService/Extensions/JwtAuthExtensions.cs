@@ -1,31 +1,31 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using IdentityService.Models.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
-namespace IdentityService.Extensions
+namespace IdentityService.Extensions;
+
+public static class JwtAuthExtensions
 {
-    public static class JwtAuthExtensions
+    public static void AddCustomJwtAuth(this IServiceCollection services)
     {
-        public static void AddCustomJwtAuth(this IServiceCollection services)
+        IConfigurationBuilder builder = new ConfigurationBuilder();
+        builder.AddJsonFile("Configurations/auth_options.json");
+        var root = builder.Build();
+        var authOptions = new AuthOptions();
+        root.GetSection("AuthOptions").Bind(authOptions);
+        services.AddSingleton(authOptions);
+        services.AddSingleton<IJwtTokenHandler, JwtTokenHandler>();
+        services.AddSingleton<IPasswordVerificator, PasswordVerificator>();
+        services.AddAuthentication(options =>
         {
-            services.AddSingleton<IJwtTokenHandler, JwtTokenHandler>();
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.RequireHttpsMetadata = false;
-                options.SaveToken = true;
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = false,
-                    ValidateIssuerSigningKey = true,
-                    ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(JwtTokenHandler.JWT_SECURITY_KEY))
-                };
-            });
-        }
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.RequireHttpsMetadata = false;
+            options.SaveToken = true;
+            options.TokenValidationParameters = authOptions.GetTokenValidationParameters();
+        });
     }
 }

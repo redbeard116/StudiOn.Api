@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Authentication.Api.Data.Models
+namespace Authentication.Services.Data.Models
 {
     [Table("user_types", Schema = "user")]
     internal class UserType : BaseDbM

@@ -8,13 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.15" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.27.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.27.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TimeExtensions\TimeExtensions.csproj" />
+    <ProjectReference Include="..\TimeServices\TimeServices.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Configurations\auth_options.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

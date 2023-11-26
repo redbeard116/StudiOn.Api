@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Authentication.Api.Data
+namespace Authentication.Services.Data
 {
     internal interface IDbRepositoryContextFactory: IDbContextFactory<DBService>
     {

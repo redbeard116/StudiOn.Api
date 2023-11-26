@@ -1,7 +1,6 @@
-﻿using Authentication.Api.Extensions;
-using Authentication.Api.Services;
-using IdentityService;
-using IdentityService.Models;
+﻿using ResponceModel.Extensions;
+using Authentication.Services.Models;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +11,15 @@ namespace Authentication.Api.Controllers
     public class LoginController : ControllerBase
     {
         #region Fields
-        private readonly IAuthService _authService;
+        private readonly ILogger<LoginController> _logger;
+        private readonly IMediator _mediator;
         #endregion
 
         #region Constructor
-        public LoginController(IAuthService authService)
+        public LoginController(IMediator mediator, ILogger<LoginController> logger)
         {
-            _authService = authService;
+            _mediator = mediator;
+            _logger = logger;
         }
         #endregion
 
@@ -30,7 +31,8 @@ namespace Authentication.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] AuthRequest userLogin)
         {
-            var result = await _authService.AuthUser(userLogin);
+            _logger.LogInformation("POST api/login");
+            var result = await _mediator.Send(userLogin);
 
             return this.Result(result);
         }
@@ -40,10 +42,12 @@ namespace Authentication.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("refresh-token")]
-        //[ProducesResponseType(200, Type = typeof(ResponseData<UserResponse>))]
-        public async Task<IActionResult> UserRefreshToken()
+        public async Task<IActionResult> UserRefreshToken(int id)
         {
-            return Ok("It`s live");
+            _logger.LogInformation($"POST api/login/{id}/refresh-token");
+            var refreshToken = this.Request.Headers["refresh-token"];
+            var result = await _mediator.Send(new RefreshToken(id, refreshToken));
+            return this.Result(result);
         }
 
         /// <summary>
@@ -55,7 +59,9 @@ namespace Authentication.Api.Controllers
         [ProducesResponseType(200)]
         public async Task LogOut()
         {
-
+            _logger.LogInformation($"POST api/login/logout");
+            var refreshToken = this.Request.Headers["refresh-token"];
+            await _mediator.Send(new UserLogout(refreshToken));
         }
         #endregion
     }

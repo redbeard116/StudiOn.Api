@@ -11,9 +11,11 @@
 /IdentityService/obj/*
 /ResponceModel/bin/*
 /ResponceModel/obj/*
-/TimeExtensions/bin/*
-/TimeExtensions/obj/*
+/TimeServices/bin/*
+/TimeServices/obj/*
 /Market.Api/bin/*
 /Market.Api/obj/*
 /DatabaseModelsBase/bin/*
 /DatabaseModelsBase/obj/*
+/Authentication.Services/bin/*
+/Authentication.Services/obj/*
