@@ -42,11 +42,11 @@ namespace Authentication.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("refresh-token")]
-        public async Task<IActionResult> UserRefreshToken(int id)
+        public async Task<IActionResult> UserRefreshToken()
         {
-            _logger.LogInformation($"POST api/login/{id}/refresh-token");
+            _logger.LogInformation($"POST api/login/refresh-token");
             var refreshToken = this.Request.Headers["refresh-token"];
-            var result = await _mediator.Send(new RefreshToken(id, refreshToken));
+            var result = await _mediator.Send(new RefreshToken(this.HttpContext.Request, refreshToken));
             return this.Result(result);
         }
 

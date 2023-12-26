@@ -48,7 +48,7 @@ internal class AuthService : IRequestHandler<AuthRequest, ResponseData<AuthRespo
             if (user != null)
             {
                 //TODO role
-                var authResonse = _loginService.GenerateJwtToken(user.Login, "Admin", user.Id);
+                var authResonse = _loginService.GenerateJwtToken(user.Login, user.UserType.Name, user.Id);
 
                 return new ResponseData<AuthResponce>(authResonse);
             }

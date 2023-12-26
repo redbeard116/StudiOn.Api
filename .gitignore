@@ -3,8 +3,8 @@
 /ApiGateway/obj/*
 /IdentityServer/bin/*
 /IdentityServer/obj/*
-/Producst.Api/bin/*
-/Producst.Api/obj/*
+/Product.Api/bin/*
+/Product.Api/obj/*
 /Authentication.Api/bin/*
 /Authentication.Api/obj/*
 /IdentityService/bin/*
@@ -21,3 +21,9 @@
 /Authentication.Services/obj/*
 /Market.Services/bin/*
 /Market.Services/obj/*
+/User.Services/bin/*
+/User.Services/obj/*
+/User.Api/bin/*
+/User.Api/obj/*
+/Product.Services/bin/*
+/Product.Services/obj/*

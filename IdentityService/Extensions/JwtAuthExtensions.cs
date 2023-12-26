@@ -17,6 +17,7 @@ public static class JwtAuthExtensions
         services.AddSingleton(authOptions);
         services.AddSingleton<IJwtTokenHandler, JwtTokenHandler>();
         services.AddSingleton<IPasswordVerificator, PasswordVerificator>();
+        services.AddSingleton(authOptions.GetTokenValidationParameters());
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

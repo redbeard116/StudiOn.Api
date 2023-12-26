@@ -15,12 +15,17 @@ namespace ResponceModel
 
         }
 
-        public ResponseData(T data,HttpStatusCode httpStatusCode = HttpStatusCode.OK, string errorMessage = null) : base(httpStatusCode, errorMessage)
+        public ResponseData(string errorMessage, HttpStatusCode httpStatusCode = HttpStatusCode.BadRequest) : base(httpStatusCode, errorMessage)
+        {
+
+        }
+
+        public ResponseData(T data, HttpStatusCode httpStatusCode = HttpStatusCode.OK, string errorMessage = null) : base(httpStatusCode, errorMessage)
         {
             Data = data;
         }
 
-        public T Data { get;  init; }
+        public T Data { get; init; }
     }
 
     public class VoidResponse : ResponseBase

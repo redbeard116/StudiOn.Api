@@ -1,17 +1,18 @@
 ﻿using IdentityService.Models;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using ResponceModel;
 
 namespace Authentication.Services.Models;
 
 public class RefreshToken : IRequest<ResponseData<AuthResponce>>
 {
-    public RefreshToken(int userId, string refreshToken)
+    public RefreshToken(HttpRequest httpRequest, string refreshToken)
     {
-        UserId = userId;
+        HttpRequest = httpRequest;
         Token = refreshToken;
     }
 
-    public int UserId { get; init; }
+    public HttpRequest HttpRequest { get; init; }
     public string Token { get; init; }
 }

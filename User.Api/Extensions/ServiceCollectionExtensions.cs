@@ -1,18 +1,17 @@
-﻿using Market.Services.Extensions;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
+using User.Services.Extensions;
 
-namespace Market.Api.Extensions;
+namespace User.Api.Extensions;
 
 internal static class ServiceCollectionExtensions
 {
     public static void AddServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddMarketServices(configuration);
-
+        services.AddAuthServices(configuration);
         services.AddSwaggerGenNewtonsoftSupport();
         services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Market API", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "User API", Version = "v1" });
         });
 
         services.AddControllers().AddNewtonsoftJson(action =>

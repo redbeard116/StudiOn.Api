@@ -1,6 +1,5 @@
-using Authentication.Services.Extensions;
-using Authentication.Api.Extensions;
 using NLog.Web;
+using Product.Api.Extensions;
 
 var logFactory = NLogBuilder.ConfigureNLog(GetNlogConfig());
 var logger = logFactory.GetCurrentClassLogger();
@@ -28,7 +27,9 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseAuthorization();
+app.UseHttpsRedirection();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

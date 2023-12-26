@@ -1,6 +1,6 @@
-using Authentication.Services.Extensions;
-using Authentication.Api.Extensions;
 using NLog.Web;
+using User.Api.Extensions;
+using User.Services.Extensions;
 
 var logFactory = NLogBuilder.ConfigureNLog(GetNlogConfig());
 var logger = logFactory.GetCurrentClassLogger();
@@ -17,18 +17,12 @@ builder.Services.AddServices(builder.Configuration);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        options.RoutePrefix = string.Empty;
-    });
-}
+app.SetDatabaseMigrations();
 
-app.UseAuthorization();
+// Configure the HTTP request pipeline.
+
+app.UseHttpsRedirection();
+
 app.UseAuthorization();
 
 app.MapControllers();

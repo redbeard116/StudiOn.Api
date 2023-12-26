@@ -1,14 +1,14 @@
-﻿using Market.Services.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using User.Services.Data;
 
-namespace Market.Services.Extensions;
+namespace User.Services.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddMarketServices(this IServiceCollection serviceCollection, IConfiguration configuration)
+    public static void AddAuthServices(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
         serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
